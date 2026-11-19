@@ -1,40 +1,201 @@
 * { box-sizing: border-box; }
 
+:root {
+  --bg-color: #b2dfdb;
+  --text-color: #0f172a;
+  --link-color: #2563eb;
+  --header-bg: rgba(255, 255, 255, 0.7);
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+  --error-color: #dc2626;
+  --success-color: #16a34a;
+  --button-bg: #2563eb;
+  --button-text: #ffffff;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+body.dark-theme {
+  --bg-color: #0f172a;
+  --text-color: #e2e8f0;
+  --link-color: #60a5fa;
+  --header-bg: rgba(30, 41, 59, 0.8);
+  --card-bg: rgba(30, 41, 59, 0.85);
+  --input-bg: #1e293b;
+  --input-border: #475569;
+  --error-color: #f87171;
+  --success-color: #4ade80;
+  --button-bg: #3b82f6;
+  --button-text: #ffffff;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
 body {
   margin: 0;
   font-family: Century gothic, sans-serif;
-  background: #fff7ed;
-  background-color: #ffe0b2;
-  color: #1a237e;
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
 }
 
 header, nav, main, footer {
-  padding: 28px;
-  max-width: 1100px;
+  padding: 16px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
-nav a {
-  margin-right: 24px;
-  color: #d81b60;
-  text-decoration: none;
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: var(--header-bg);
+  border-radius: 0 0 12px 12px;
+  box-shadow: var(--shadow);
 }
 
-h1 { color: #1a237e; }
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 8px;
+}
+
+nav a {
+  margin-right: 12px;
+  color: var(--link-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+nav a:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+h1, h2 {
+  color: var(--text-color);
+}
 
 img {
   max-width: 100%;
   height: auto;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
 }
 
+/* Кнопки */
+button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: var(--button-bg);
+  color: var(--button-text);
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.15s, opacity 0.2s, box-shadow 0.2s;
+  box-shadow: var(--shadow);
+}
+
+button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+#themeToggle, #theme {
+  white-space: nowrap;
+}
+
+/* Карточки */
 .cards {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 16px;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   .cards {
     flex-direction: row;
   }
+}
+
+/* Форма обратной связи */
+.glass-container {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 24px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.input-group label {
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.input-group input,
+.input-group textarea {
+  padding: 10px 12px;
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  background: var(--input-bg);
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  resize: vertical;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+  outline: none;
+  border-color: var(--link-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+  color: #94a3b8;
+}
+
+/* Ошибки */
+.error {
+  color: var(--error-color);
+  font-size: 0.875rem;
+  margin-top: 4px;
+  min-height: 1.2em;
+}
+
+.general-error {
+  color: var(--error-color);
+  font-weight: 600;
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  background: rgba(220, 38, 38, 0.1);
+  border: 1px solid var(--error-color);
+  display: none;
+}
+
+.general-error.show {
+  display: block;
 }
